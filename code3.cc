@@ -4,8 +4,9 @@
 #include "macros.h"
 
 void _sendFile (int clientSocket) {
-  char buffer[BUFF_SIZE] = { '\0' };
-  bzero(buffer, BUFF_SIZE);
+  char buffer[BUFF_SIZE] = { '\0' }; 
+  // if buf start with null, strlen becomes zeor and crash
+  bzero(buffer, BUFF_SIZE); // \0 was not necessary as bzero used
 
   int readStatus = read(clientSocket, buffer, BUFF_SIZE);
   if (readStatus < 0) {
@@ -17,7 +18,9 @@ void _sendFile (int clientSocket) {
   char fileName[BUFF_SIZE] = { '\0' };
   // int sscanf ( const char * s, const char * format, ...);
   // Reads data from s and stores them according to parameter format into the locations given by the additional argument
-  sscanf(buffer, "GET /%s ", fileName);
+  sscanf(buffer, "GET /%s ", fileName); // file name is empty
+                                        // a string from filename could be bigger then buffer size
+					// need \n at the end?
 
   // Handle file request.
   FILE* fp = fopen(fileName, "rb");
@@ -26,14 +29,15 @@ void _sendFile (int clientSocket) {
     return;
   }
 
-  fprintf(stdout, "Sending: %s\n", fileName);
+  fprintf(stdout, "Sending: %s\n", fileName); //fnprintf
 
   char fileChar = 0;
   int i = -1;
   bzero(buffer, BUFF_SIZE);
   while ((fileChar = fgetc(fp)) != EOF) {
-    buffer[++i] = fileChar;
+    buffer[++i] = fileChar; // must boundary check for buffer size
   }
+  // must add \n
   fclose(fp);
 
   // Temporary header handling - only text/HTML at the moment.
@@ -43,10 +47,10 @@ void _sendFile (int clientSocket) {
   sprintf(contentLength, "Content-Length: %zu\r\n", strlen(buffer) + 1);
 
   char response[BUFF_SIZE] = { '\0' };
-  strcat(response, header);
-  strcat(response, contentType);
-  strcat(response, contentLength);
-  strcat(response, "\r\n\r\n");
+  strcat(response, header); // strncat
+  strcat(response, contentType); // strncat
+  strcat(response, contentLength); // strncat
+  strcat(response, "\r\n\r\n"); // strncat
 
   // There goes the header.
   if (write(clientSocket, response, strlen(response)) < 0) {
@@ -60,6 +64,6 @@ void _sendFile (int clientSocket) {
     return;
   }
 
-  fprintf(stdout, "Sent: %s\n\n", fileName);
+  fprintf(stdout, "Sent: %s\n\n", fileName); // fnprintf
   fprintf(stdout, "Waiting..\n\n");
 }

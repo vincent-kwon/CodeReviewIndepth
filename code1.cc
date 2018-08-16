@@ -4,9 +4,12 @@
 
 void swap(char*str1, char*str2) {
 	 char tem[20];
-	 strcpy(tem,str1);
-	 strcpy(str1,str2);
-	 strcpy(str2,tem);
+	 strcpy(tem,str1); // null check for str1
+	                   // size check needed between temp and str1.
+			   // use strncpy 
+	 strcpy(str1,str2); // nullcheck and size check for str2
+	                    // strncpy should be used
+	 strcpy(str2,tem);  // size check between str2 and tem
 }
 
 int main( int argc, char *argv[] )
