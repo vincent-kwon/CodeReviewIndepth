@@ -98,4 +98,4 @@
 
 - 복잡하면 init function 해라 constructor말고
 
--  
+- team 마다 정하기도 한다.
