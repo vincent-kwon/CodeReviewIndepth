@@ -1,0 +1,101 @@
+- a lot of review, should not impact others
+
+- signature chanaged, there is a hidden dependency. build status dash board project became failed.
+
+- 리뷰어도 같이 
+
+- 싱글 레포지터리
+
+- namespace conflict 생길 수 있음
+
+- dashboard 
+
+- system daemon 정기적이지 않게 몇 시간에 한 번 씩 돈다
+
+- owner file
+
+- web-based code review tool (critic?)
+
+- This tool automatic tests
+
+- auto abuse
+
+- language readability reviewer (style guide)
+
+- reviewer:? if bold, Jeff Dean
+
+- 40~50 comment
+
+- noogler would like to show off, commit 2000 line of code should be reject 
+
+- First one 30 review from first commit
+
+- slow development time
+
+- make cl short ( less than 300 line)
+
+- cl - cl - cl 
+  _ group cl _
+
+- may talk off-line
+
+- all write code (including senior)
+
+- coverage tool : unit test tool
+
+- dependency injection for unit test
+
+- regression test
+
+- expected coverage 85%, more like 95%
+
+- emulator: flakniess : 가장 기본적인 유닛 테스트
+
+- real device: 실제 타겟 이슈
+
+- 모든 툴은 웹으로
+
+- Buganizer
+
+- release: production binaries weekly or even daily
+
+- click 한 번 으로 바이너리 패키징 뭉 deploying 
+
+- 새로 만들어진 10000 개 deploy 전략이 필요, 릴리즈 엔지니어링이 버튼 두 번으로 끝난다
+
+- launch approval: 새로운 feature 에 대해서는 legal, security, privacy, reliability 요구 사항을 만족해야 한다
+
+  - 전문 committee 거쳐야 통과한다
+
+- Post-mortems: 소프트웨어 엔지니어는 실수를 할 수 밖에 없음. 그래서 필요함
+
+- Constant refactoring: why needed?     
+
+- Thanks / Good / Code got cleaner
+
+- C++ 11 move operator shows changes
+
+- bad comment: This is a dead code => do not know what to do better to say explicitly to remove it
+
+- bad comment: because.... It is not encouraged to perform a dynamic memory 
+
+- bad comment: please modify the pointer name like previous pointer : for better readabilty 등 reasoning 이 필요함
+
+- comment, thread-safe, function 마다 한 줄 정도 필요, 리턴 값들에 대해서 true, false를 적어주는게 좋다.
+
+- const char GetData() const <== const 사용 
+
+- new -> unique_ptr
+
+- 하나의 function 마다 하나의 테스트 넣자
+
+- assert와 expect 차이: 이 코드는 반드시 이 시점에서는 이거여야 해. 만약 테스트 하는 behavior는 expect로 한다.
+
+- too many empty lines, tab x, unnecessary return why?, c++ initializer, use different name for local and member, set nullptr to deleted pointer variable (dangling pointer)
+  google은 delete 시 macro to set null (find it)
+
+- 코멘트에 액션, no consistency, no readability consideration for local variable (temp, ptr), this keyword x, dynamic allocation in constuctor and destructor
+
+- 복잡하면 init function 해라 constructor말고
+
+-  
